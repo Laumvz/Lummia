@@ -33,7 +33,7 @@ Esta colección transforma el caos en claridad desde el primer uso.
 </h2>
 
 <div style="text-align:center; margin-top:15px;">
-  <img src="AQUI_TU_IMAGEN" 
+  <img src"https://drive.google.com/file/d/1Q9MycqEO_sHcnPDZMFqPeu3atSjavukk/view?usp=drivesdk" 
        style="width:100%; max-width:600px; border-radius:15px; box-shadow:0 10px 25px rgba(0,0,0,0.2);">
 </div>
 
