@@ -1,6 +1,30 @@
 <p>&nbsp;</p>
-<div style="max-width:800px; margin:auto; font-family:'Segoe UI', Arial, sans-serif; line-height:1.6; padding:20px; color:#ffffff;;">
+<div style="max-width:800px; margin:auto; font-family:'Segoe UI', Arial, sans-serif; line-height:1.6; padding:20px; color:#ffffff;">
 
+<!-- TÍTULO -->
+<h1 style="text-align:center; color:#98FF98; font-size:30px; text-shadow:0 2px 10px rgba(0,0,0,0.3);">
+Plantillas para Estudiantes 2026 ✨
+</h1>
+
+<p style="text-align:center; color:#e0e0e0; font-size:14px;">
+Planners, horarios y organizadores aesthetic gratis
+</p>
+
+<!-- INTRO GLASS -->
+<div style="background:rgba(255,255,255,0.12); backdrop-filter:blur(10px); padding:20px; border-radius:18px; margin-top:20px; box-shadow:0 8px 25px rgba(0,0,0,0.2);">
+<p>
+Lummia te ayuda a organizar tu año escolar con diseños aesthetic y recursos prácticos que harán que estudiar sea más fácil y bonito.
+Transforma el caos en claridad desde el primer uso.
+</p>
+</div>
+
+<!-- INCLUYE -->
+<h2 style="margin-top:30px; color:#87CEEB;">✔ Incluye:</h2>
+<ul style="padding-left:20px;">
+<li>Planificación semanal aesthetic</li>
+<li>Horarios personalizables</li>
+<li>Trackers de hábitos</li>
+<li
 <!-- TÍTULO -->
 <h4 style="text-align:center; color:#98FF98; font-size:28px;">
 Plantillas para Estudiantes 2026 ✨
