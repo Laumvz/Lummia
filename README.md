@@ -2,9 +2,9 @@
 <div style="max-width:800px; margin:auto; font-family:'Segoe UI', Arial, sans-serif; line-height:1.6; padding:20px; color:#ffffff;;">
 
 <!-- TÍTULO -->
-<h3 style="text-align:center; color:#98FF98; font-size:28px;">
+<h4 style="text-align:center; color:#98FF98; font-size:28px;">
 Plantillas para Estudiantes 2026 ✨
-</h3>
+</h4>
 
 <p style="text-align:center; font-size:14px;">
 Planners, horarios y organizadores aesthetic gratis
@@ -100,7 +100,7 @@ backdrop-filter:blur(10px);" padding:15px; border-radius:12px; box-shadow:0 4px 
 
 </p>
 
-<a href="https://drive.google.com/drive/folders/1ZWib7V-evPJt1q44jCbUPjbLEK-i4ZCY" 
+<a href="https://mega.nz/folder/nCJlXDKb#494VpvD61R6c0ikf5c92zg" 
 target="_blank"
 style="background:#98FF98; 
 color:#000; 
