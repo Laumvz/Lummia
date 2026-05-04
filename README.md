@@ -124,7 +124,7 @@ backdrop-filter:blur(10px);" padding:15px; border-radius:12px; box-shadow:0 4px 
 
 </p>
 
-<a href="https://mega.nz/folder/nCJlXDKb#494VpvD61R6c0ikf5c92zg" 
+<a href="https://photos.app.goo.gl/khx4gawX9ipVCfSW7" 
 target="_blank"
 style="background:#98FF98; 
 color:#000; 
