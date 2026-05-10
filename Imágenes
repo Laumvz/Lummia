@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title></title>
+<style>
+.hcg-slider {
+    width: auto;
+    height: auto;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.hcg-slide-container {
+    height: 100%;
+    width: 100%;
+    max-width: 100%;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+}
+.hcg-slider-track {
+    height: 100%;
+}
+.hcg-slides {
+    width: 100%;
+    height: 100%;
+    display: none;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    border: solid 1px #a0a0a0;
+    box-sizing: border-box;
+}
+.hcg-slides img {
+    max-width: 100%;
+    max-height: 100%;
+    min-height: 100px;
+    display: inline-block;
+}
+#hcg-slide-prev, #hcg-slide-next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    text-decoration: none;
+    text-shadow: 1px 1px 5px #686868;
+    z-index: 2;
+}
+#hcg-slide-next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+#hcg-slide-prev {
+    left: 0;
+    border-radius: 0 3px 3px 0;
+}
+#hcg-slide-prev:hover, #hcg-slide-next:hover {
+    background-color: #000c;
+}
+.hcg-slide-dot-control {
+    margin-top: 10px;
+    text-align: center;
+}
+.hcg-slide-dot {
+    cursor: pointer;
+    height: 13px;
+    width: 13px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+}
+.hcg-slide-dot.dot-active {
+    background-color: #717171;
+}
+/************CSS Animation***********/
+
+.animated {
+    animation-name: fadeInUp;
+    animation-duration: 1s;
+}
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.fadeInUp {
+    animation-name: fadeInUp;
+}
+
+
+</style>
+</head>
+<body>
+<!-- https://www.html-code-generator.com/html/image-slideshow-generator -->
+
+<div id="hcg-slider-1" class="hcg-slider">
+    <div class="hcg-slide-container">
+        <div class="hcg-slider-track"></div>
+
+        <a href="#" id="hcg-slide-prev">❮</a>
+        <a href="#" id="hcg-slide-next">❯</a>
+    </div>
+
+    <div class="hcg-slide-dot-control"></div>
+</div>
+
+<script>
+const imagesList = [
+    {"src":"https://i.ibb.co/Ng5mv6nZ/Post-png.png","alt":"Luminia_templante","name":"","link":"https://ibb.co/twgxGMP8"},
+    {"src":"https://i.ibb.co/Xx0gzCrn/Post-png.png","alt":"","name":"","link":"https://ibb.co/8gvpj7Ly"},
+    {"src":"https://i.ibb.co/5WLgxvDL/Post-png.png","alt":"","name":"","link":"https://ibb.co/8D9L4239"},
+    {"src":"https://i.ibb.co/PGLtLRgT/4.png","alt":"","name":"","link":"https://ibb.co/s9ftfhq5"},
+    {"src":"https://i.ibb.co/KjcypBLR/Post-png.png","alt":"","name":"","link":"https://ibb.co/Z6RTpvYt"},
+    {"src":"https://i.ibb.co/XxZ01xNX/Post-png.png","alt":"","name":"","link":"https://ibb.co/HTDw6T17"},
+    {"src":"https://i.ibb.co/67pm0mJf/Post-png.png","alt":"","name":"","link":"https://ibb.co/nNVbMb85"}
+];
+
+function simpleSlider(selector, imagesList, options = {}) {
+    const slider = typeof selector === "string"
+        ? document.querySelector(selector)
+        : selector;
+
+    if (!slider || !Array.isArray(imagesList) || imagesList.length === 0) {
+        console.warn("simpleSlider: Invalid slider element or empty images list.");
+        return null;
+    }
+
+
+    const {
+        startIndex = 0,
+        animationClass = "animated",
+
+        // Auto play options
+        autoplay = false,
+        autoplayDelay = 3000,
+        pauseOnHover = true
+    } = options;
+
+    const track = slider.querySelector(".hcg-slider-track");
+    const dotsContainer = slider.querySelector(".hcg-slide-dot-control");
+    const prevBtn = slider.querySelector("#hcg-slide-prev");
+    const nextBtn = slider.querySelector("#hcg-slide-next");
+
+    let index = startIndex;
+    const total = imagesList.length;
+    let autoplayTimer = null;
+
+    //  Build Slides
+    track.innerHTML = imagesList.map((img, i) => `
+    <a ${img.link ? `href="${img.link}" target="_blank"` : ""} class="hcg-slides ${animationClass}">
+      <img src="${img.src}" alt="${img.alt || ""}">
+    </a>
+    `).join("");
+
+    dotsContainer.innerHTML = imagesList.map((_, i) => `
+    <a href="#" class="hcg-slide-dot" data-id="${i}"></a>
+    `).join("");
+
+    const slides = slider.querySelectorAll(".hcg-slides");
+    const dots = slider.querySelectorAll(".hcg-slide-dot");
+
+    //  Core Logic
+    const showSlide = (i) => {
+        index = (i + total) % total;
+
+        slides.forEach((slide, idx) => {
+            slide.style.display = idx === index ? "flex" : "none";
+            dots[idx].classList.toggle("dot-active", idx === index);
+        });
+    };
+
+    // Auto Play
+    const startAutoplay = () => {
+        if (!autoplay || autoplayTimer) return;
+        autoplayTimer = setInterval(() => {
+            showSlide(index + 1);
+        }, autoplayDelay);
+    };
+
+    const stopAutoplay = () => {
+        clearInterval(autoplayTimer);
+        autoplayTimer = null;
+    };
+
+
+    // Controls
+    prevBtn.addEventListener("click", e => {
+        e.preventDefault();
+        showSlide(index - 1);
+    });
+
+    nextBtn.addEventListener("click", e => {
+        e.preventDefault();
+        showSlide(index + 1);
+    });
+
+    dotsContainer.addEventListener("click", e => {
+        const dot = e.target.closest(".hcg-slide-dot");
+        if (!dot) return;
+        e.preventDefault();
+        showSlide(+dot.dataset.id);
+    });
+
+    if (pauseOnHover && autoplay) {
+        slider.addEventListener("mouseenter", stopAutoplay);
+        slider.addEventListener("mouseleave", startAutoplay);
+    }
+
+
+    // Init
+    showSlide(index);
+    startAutoplay();
+
+
+    // Drag / Swipe Support
+    let startX = 0;
+    let startY = 0;
+    let isSwiping = false;
+    const SWIPE_THRESHOLD = 50; // px
+
+
+    slider.addEventListener("touchstart", e => {
+        const touch = e.touches[0];
+        startX = touch.clientX;
+        startY = touch.clientY;
+        isSwiping = true;
+    }, { passive: true });
+
+    slider.addEventListener("touchmove", e => {
+        if (!isSwiping) return;
+
+        const touch = e.touches[0];
+        const diffX = touch.clientX - startX;
+        const diffY = touch.clientY - startY;
+
+        // Ignore vertical scroll
+        if (Math.abs(diffY) > Math.abs(diffX)) {
+            isSwiping = false;
+            return;
+        }
+
+        e.preventDefault();
+    }, { passive: false });
+
+    slider.addEventListener("touchend", e => {
+        if (!isSwiping) return;
+
+        const touch = e.changedTouches[0];
+        const diffX = touch.clientX - startX;
+
+        if (Math.abs(diffX) > SWIPE_THRESHOLD) {
+            diffX < 0 ? showSlide(index + 1) : showSlide(index - 1);
+        }
+
+        isSwiping = false;
+    });
+
+
+    // Public API
+    return {
+        next: () => showSlide(index + 1),
+        prev: () => showSlide(index - 1),
+        goTo: i => showSlide(i),
+        play: startAutoplay,
+        pause: stopAutoplay,
+        getIndex: () => index
+    };
+}
+
+
+
+
+// Usage
+const slider = simpleSlider("#hcg-slider-1", imagesList, {
+    autoplay: true,
+    autoplayDelay: 2000,
+    pauseOnHover: true
+});
+
+
+</script>
+</body>
+</html>
